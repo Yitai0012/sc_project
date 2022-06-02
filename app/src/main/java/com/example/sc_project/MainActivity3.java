@@ -17,8 +17,9 @@ public class MainActivity3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        mAuth=FirebaseAuth.getInstance();
         btn_logout=(Button)findViewById(R.id.btn_logout);
+        mAuth=FirebaseAuth.getInstance();
+
         btn_logout.setOnClickListener(View ->{
             mAuth.signOut();
             startActivity(new Intent(MainActivity3.this,MainActivity.class));

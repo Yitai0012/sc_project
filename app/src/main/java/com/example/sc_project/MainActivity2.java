@@ -24,33 +24,36 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        mAuth=FirebaseAuth.getInstance();
         register_button=(Button)findViewById(R.id.register_button);
+        email_id = (TextInputEditText)findViewById(R.id.email_id);
+        email_pw = (TextInputEditText) findViewById(R.id.email_pw);
+        mAuth=FirebaseAuth.getInstance();
+
         register_button.setOnClickListener(View -> {
-            createuser();
+            createUser();
 
         });
 
     }
-    void createuser(){
+    private void createUser(){
         String email = email_id.getText().toString();
         String password = email_pw.getText().toString();
 
-        if(TextUtils.isEmpty(email)){
-            email_id.setError("email cannot be empty");
+        if (TextUtils.isEmpty(email)){
+            email_id.setError("Email cannot be empty");
             email_id.requestFocus();
-        }else if(TextUtils.isEmpty(password)){
-            email_pw.setError("password cannot be empty");
+        }else if (TextUtils.isEmpty(password)){
+            email_pw.setError("Password cannot be empty");
             email_pw.requestFocus();
         }else{
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(MainActivity2.this,"User Registered Successfully" ,Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity2.this,MainActivity.class));
+                    if (task.isSuccessful()){
+                        Toast.makeText(MainActivity2.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity2.this, MainActivity.class));
                     }else{
-                        Toast.makeText(MainActivity2.this,"User Registered Error" ,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity2.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

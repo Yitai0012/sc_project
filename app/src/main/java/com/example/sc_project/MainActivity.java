@@ -31,15 +31,18 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gobutton = findViewById(R.id.gobutton);
-
-        mAuth=FirebaseAuth.getInstance();
+        gobutton = (Button) findViewById(R.id.gobutton);
         btn_login=(Button)findViewById(R.id.btn_login);
+        em_id = (TextInputEditText)findViewById(R.id.em_id);
+        em_pw = (TextInputEditText) findViewById(R.id.em_pw);
+        mAuth=FirebaseAuth.getInstance();
+
         gobutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View View) {
-                Intent intent = new Intent(MainActivity.this,MainActivity2.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this,MainActivity2.class);
+                startActivity(new Intent(MainActivity.this,MainActivity2.class));
+                //startActivity(intent);
             }
         });
 
@@ -76,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
-        //if(user == null){
-            //startActivity(new Intent(MainActivity.this,MainActivity.class));
-        //}
+
     }
 }
